@@ -1,0 +1,167 @@
+
+ <nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand me-2" href="/listings"><i class="fa-solid fa-compass"></i></a>
+    <form class="d-flex d-md-none flex-grow-1 mx-2" role="search">
+      <input class="form-control search-inp" type="search" placeholder="Search destination">
+      <button class="btn search-btn ms-2" type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
+    <button class="navbar-toggler ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+      <div class="navbar-nav ms-auto d-none d-md-flex">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2 search-inp" type="search" placeholder="Search destination">
+          <button class="btn search-btn" type="submit"><i class="fa-solid fa-magnifying-glass"></i>Search</button>
+        </form>
+      </div>
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">Wanderlust your home</a>
+        <% if (!currUser) { %>
+          <a class="nav-link" href="/signup"><b>Sign up</b></a>
+          <a class="nav-link" href="/login"><b>Log in</b></a>
+        <% } %>
+        <% if (currUser) { %>
+          <a class="nav-link" href="/logout">Logout</a>
+        <% } %>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<style>
+
+
+
+/* Custom styles for the navbar toggler on mobile */
+@media (max-width: 767.98px) {
+  .navbar-toggler {
+    border: none;
+    background-color: #ffffff; /* Clean white background for toggler */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Subtle shadow for depth */
+    padding: 0.5rem;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+  }
+
+  .navbar-toggler:hover {
+    background-color: #f1f1f1; /* Slight hover effect */
+    transform: scale(1.05); /* Subtle scaling effect */
+  }
+
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2851, 51, 51, 1%29' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .navbar-collapse {
+    background-color:  #bac2bc; /* Sleek dark background for the dropdown menu */
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds depth */
+    transition: all 0.3s ease-in-out;
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .navbar-collapse.show {
+    max-height: 300px; /* Smoothly expand menu on toggle */
+  }
+
+  .nav-link {
+    color: #ffffff; /* White text for links */
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    padding: 0.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .nav-link:hover {
+    background-color: #495057; /* Subtle hover effect */
+    color: #f8f9fa;
+  }
+
+  .nav-item:not(:last-child) {
+    margin-bottom: 0.5rem;
+  }
+
+  /* Make the navbar full-screen for a better mobile experience */
+  .navbar-collapse {
+    position: absolute;
+    top: 0;
+    left: 100;
+    right: 0;
+    z-index: 1050;
+  }
+}
+
+  /* Mobile-specific styling */
+  .search-btn {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+  }
+  .search-btn:hover {
+    background-color: #fe424d;
+    color: #fff;
+  }
+  .search-btn i {
+    display: inline;
+    margin-right: 0.5rem;
+  }
+  .search-inp {
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    font-size: 1rem;
+  }
+
+  
+  @media (max-width: 767.98px) {
+    .navbar-brand {
+      margin-right: 0;
+    }
+
+    .search-inp {
+      flex-grow: 1; /* Make the search bar expand */
+      width: 100px;
+    }
+
+    .search-btn {
+      width: 40px; /* Keep the search button compact */
+    }
+
+    .navbar-toggler {
+      margin-left: 0;
+    }
+
+    .d-md-none {
+      display: flex !important;
+    }
+
+    .d-md-flex {
+      display: none !important;
+    }
+  }
+
+  /* Maintain original layout for larger screens */
+  @media (min-width: 768px) {
+    .d-md-none {
+      display: none !important;
+    }
+
+    .d-md-flex {
+      display: flex !important;
+    }
+  }
+</style>

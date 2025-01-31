@@ -1,0 +1,235 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+ /* Media Query for Mobile Devices */
+ @media (max-width: 768px) {
+   .row {
+     margin: 0; 
+   }
+ 
+   .col-8, .col-6, .col-5, .offset-3, .offset-5 {
+     width: 100% !important; /* Full-width for all columns */
+     margin: 0;
+   }
+ 
+   .show-card, .listing-card {
+     margin: 5px auto; 
+     padding: 10px;
+     
+   }
+ 
+   .show-img {
+     width: 100%; /* Image should take full width */
+     height: auto; /* Maintain aspect ratio */
+     border-radius: 10px; /* Optional: Rounded corners for better look */
+   }
+ 
+   .btns {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px; /* Add some space above buttons */
+    width:30%;
+    margin-right:30px;
+    
+  }
+
+  .btns a, .btns form button {
+    width: 20%; /* Both buttons take equal width */
+    margin: 0; /* Remove any extra margins */
+    margin-left: 15px;
+  }
+
+  .btns a {
+    text-align: center; /* Ensure text is centered in the button */
+    margin: 0 0 20px; 
+  }
+   .review, .card-body, .starability-slot, textarea {
+     width: 100%;
+     margin-right:10px; 
+     /* margin: 10 auto; */
+     
+   }
+   .card {
+     width: 100% !important; /* Make review cards full-width */
+     /* margin-bottom: 10px; */
+     margin-right:10px !important;
+   }
+   textarea {
+     resize: none; /* Prevent resizing for better appearance on mobile */
+   }
+ 
+   form .btn-outline-dark {
+     width: 30%; /* Make submit button full width */
+     margin-top: 10px;
+   }
+ 
+   .starability-slot label {
+     font-size: 1.2rem; /* Increase star size for mobile */
+   }
+ 
+   .mb-3 {
+     margin-bottom: 15px; /* Add more space between fields */
+    
+   }
+ 
+   h3, h4 {
+     text-align: left; /* Center headings on mobile */
+   }
+ 
+   p.card-text, .card-title {
+     text-align: left; /* Center align text for reviews and details */
+}
+   
+  }
+ </style>
+<div class="row mt-3">
+  <div class="col-8 offset-3">
+  <br>
+ <h3><%= listing.title %></h3>
+</div>
+  <div class="card col-6 offset-3 show-card listing-card">
+    <img src="<%= listing.image.url %>" class="card-img-top show-img" alt="listing_image">
+    <div class="card-body">
+      <p class="card-text">
+        Owned by - 
+        <i>
+          <%= listing.owner ? listing.owner.username : 'Unknown Owner' %>
+        </i>
+      </p>
+       <p class="card-text"> <%= listing.description %></p>
+      
+       <p class="card-text"> &#8377; <%= listing.price.toLocaleString("en-IN") %> </p> 
+        <p class="card-text"><%= listing.location %> </p> 
+        <p class="card-text"><%= listing.country %> </p> 
+
+    </div>
+  </div>
+  <br/>
+<% if (currUser && listing.owner._id.equals(currUser._id)) { %>
+<div class="btns">
+  <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark col-1 offset-3 edit-btn">Edit</a>
+  <form method="POST" action="/listings/<%= listing._id %>?_method=Delete" >
+  <button class="btn btn-dark offset-5">Delete</button>
+</form>
+</div>
+<% } %>
+</div> 
+<div class="review">
+<div class="col-8 offset-3 mb-3">
+<% if (currUser) { %>
+    <hr>
+  <h4>Leave a Review</h4>
+<form action="/listings/<%= listing.id %>/reviews" method="post"  class="needs-validation">
+<div class="mb-3 mt-3">
+  <label for="rating" class="form-label">Rating</label>
+<fieldset class="starability-slot">
+ 
+  <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked aria-label="No rating." />
+  <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+  <label for="first-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+  <label for="first-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+  <label for="first-rate3" title="Average">3 stars</label>
+  <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+  <label for="first-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+  <label for="first-rate5" title="Amazing">5 stars</label>
+</fieldset>
+</div>
+<div class="mb-3 mt-3">
+  <label for="comment" class="form-label">Comments</label>
+  <textarea id="comment" name="review[comment]" cols="30" rows="5" class="form-control" required></textarea>
+  <div class="invalid-feedback">Please write some comment for review</div>
+</div>
+<button class="btn btn-outline-dark">Submit</button>
+</form>
+<hr>
+<% } %>
+
+
+<% if(listing.reviews.length > 0) { %>
+<div class="row">
+  <p><b>All Review</b></p>
+  <% for( review of listing.reviews) { %>
+ <div class="card col-5 ms-3 mb-3">
+  <div class="card-body">
+     <h5 class="card-title">@<%= review.author.username %></h5>
+    <p class="starability-result card-text"data-rating="<%= review.rating %>">
+    </p>
+    <p class="card-text"> <%= review.comment %> </p>
+   
+  </div>
+  <form action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE" class="mb-3" method="POST">
+    <button class="btn btn-sm btn-dark mt-3">Delete</button>
+  </form>
+ </div>
+  <% } %>
+</div>
+</div>
+<% } %>
+<hr>
+</div>
+</div>
+</div>
+<br>
+    <head>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIuHDWMXeyNXdeoHMAjUL8v_g_9t5dHYM"></script>
+    
+      <style>
+        #map {
+          height: 50vh;
+          width: 100%;
+          margin-top: 10px;
+          border-radius: 15px;
+          margin-bottom: 0px;
+          margin-left: 50px;
+        }
+    
+        h3 {
+          margin-left: 50px;
+        }
+    
+        /* Media query for mobile devices */
+        @media (max-width: 768px) {
+          #map {
+            margin-left: 0px; /* Adjust margin for smaller screens */
+          }
+    
+          h3 {
+            margin-left: 10px; /* Align title with smaller screen size */
+          }
+    
+          .col-6 {
+            padding-left: 10px;
+            padding-right: 10px;
+          }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="col-6 offset-3 mb-3 mr-3">
+        <h3>Where you'll be</h3>
+        <br>
+        <div id="map"></div>
+        <br>
+      </div>
+    
+      <script>
+        function initMap() {
+          const map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: 28.6139, lng: 77.2090 }, // Delhi coordinates
+            zoom: 10, // Zoom level
+          });
+        }
+        window.onload = initMap;
+      </script>
+    </body>
+    
+
+
+
+
+
+
+

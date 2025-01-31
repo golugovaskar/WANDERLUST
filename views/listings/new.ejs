@@ -1,0 +1,108 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row">
+  <!-- Blurred background with overlay -->
+  <div class="col-12 d-flex align-items-center justify-content-center" 
+    style="min-height: 100vh; background: url('/path-to-your-image.jpg') no-repeat center center/cover; position: relative; overflow: hidden;">
+    
+    <!-- Semi-transparent overlay for the blur effect -->
+    <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); z-index: 1;"></div>
+    
+    <!-- Listing Form Card -->
+    <div class="card p-4 shadow-lg" 
+      style="max-width: 70%; width: 100%; border: none; background: #ffffffb3; border-radius: 20px; z-index: 2;">
+      
+      <h3 class="text-center text-danger">Create a New Listing</h3>
+
+      <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+        
+        <!-- Title -->
+        <div class="mb-3">
+          <label for="title" class="form-label text-danger">Title:</label>
+          <input name="listing[title]" placeholder="Add a title" type="text" class="form-control" required>
+          <div class="invalid-feedback">Please enter a title.</div>
+        </div>
+
+        <!-- Description -->
+        <div class="mb-3">
+          <label for="description" class="form-label text-danger">Description:</label>
+          <textarea name="listing[description]" placeholder="Enter description" class="form-control " required></textarea>
+          <div class="invalid-feedback">Please enter a short description.</div>
+        </div>
+
+        <!-- Image Upload -->
+        <div class="mb-3">
+          <label for="image" class="form-label text-danger">Upload Listing Image</label>
+          <input name="listing[image]" type="file" class="form-control ">
+        </div>
+
+        <!-- Price and Country -->
+        <div class="row">
+          <div class="mb-3 col-md-4 col-12">
+            <label for="price" class="form-label text-danger">Price:</label>
+            <input name="listing[price]" placeholder="1200" class="form-control" required>
+            <div class="invalid-feedback">Price should be valid.</div>
+          </div>
+
+          <div class="mb-3 col-md-8 col-12">
+            <label for="country" class="form-label text-danger">Country:</label>
+            <input name="listing[country]" placeholder="India" type="text" class="form-control " required>
+            <div class="invalid-feedback">Country should be valid.</div>
+          </div>
+        </div>
+
+        <!-- Location -->
+        <div class="mb-3">
+          <label for="location" class="form-label text-danger">Location:</label>
+          <input name="listing[location]" placeholder="UP, Delhi" type="text" class="form-control " required>
+          <div class="invalid-feedback">Location should be valid.</div>
+        </div>
+
+        <!-- Add Button -->
+        <button class="btn btn-danger w-30 mt-3">Add Listing</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile-Responsive Styling -->
+<style>
+  @media (max-width: 768px) {
+    .card {
+      padding: 20px;
+    }
+
+    h3 {
+      font-size: 24px;
+    }
+
+    .btn-danger {
+      border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    background-color:  #fe424d;
+    }
+
+    .col-12 {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+  }
+</style>
+
+<!-- JavaScript for Form Validation -->
+<script>
+  (function () {
+    'use strict';
+    const forms = document.querySelectorAll('.needs-validation');
+    Array.from(forms).forEach(form => {
+      form.addEventListener('submit', event => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+</script>

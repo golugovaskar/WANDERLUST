@@ -1,0 +1,89 @@
+<% layout("/layouts/boilerplate") %>
+<div class="row">
+  <!-- Blurred background with overlay -->
+  <div class="col-12 d-flex align-items-center justify-content-center" 
+  style="min-height: 100vh; background: url('') no-repeat center center/cover; position: relative; overflow: hidden;">
+    <!-- Semi-transparent overlay for the blur effect -->
+    <div style="position: absolute; top: 150; left: 0; right: 0; bottom:150; background: rgba(255, 255, 255, 0.5); backdrop-filter: blur(10px); z-index: 1;"></div>
+    
+    <!-- Login Form -->
+    <div class="card p-4 shadow-lg"
+      style="max-width: 400px; width: 100%; border: none; background: #ffffffb3; border-radius: 20px; z-index: 2;">
+      
+      <h2 class="text-center text-danger">Login</h2>
+      
+      <form method="POST" action="/login" class="mt-4 needs-validation" novalidate>
+        <!-- Username -->
+        <div class="mb-3">
+          <label for="username" class="form-label text-danger">Username</label>
+          <input 
+            name="username" 
+            id="username" 
+            type="text" 
+            class="form-control " 
+            placeholder="Enter your username" 
+            required>
+          <div class="invalid-feedback">
+            Please enter your username.
+          </div>
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3">
+          <label for="password" class="form-label text-danger">Password</label>
+          <input 
+            name="password" 
+            id="password"
+            type="password" 
+            class="form-control " 
+            placeholder="Enter your password" 
+            required>
+          <div class="invalid-feedback">
+            Please enter your password.
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-danger w-26">Login</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<!-- CSS Styling -->
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+
+  .card {
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    margin-top: 180px;
+    margin-bottom: 180px;
+  }
+
+  .form-control {
+    border-radius: 10px;
+  }
+
+  .btn-danger {
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: bold;
+    background-color:  #fe424d;
+    
+  
+  }
+
+  @media (max-width: 768px) {
+    .card {
+      padding: 20px;
+    }
+
+    h2 {
+      font-size: 24px;
+    }
+  }
+</style>
