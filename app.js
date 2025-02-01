@@ -41,7 +41,9 @@ app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({extended: true}));
 app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
-app.use(express.static(path.join(__dirname, "/public")));
+
+// Middleware to serve static files from the public folder
+app.use(express.static(path.join(__dirname, "public")));
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
@@ -55,10 +57,6 @@ store.on("error", () => {
   console.log("error in mongo session store", err);
 });
 
-
-
-
-
 const sessionOptions = {
   store,
   secret: process.env.SECRET,
@@ -71,13 +69,7 @@ const sessionOptions = {
   },
 };
 
-app.use(session({
-  secret: 'yourSecretKey', // Replace 'yourSecretKey' with a strong, unique key
-  resave: false,
-  saveUninitialized: false,
-  cookie: { secure: false } // Set to `true` if using HTTPS
-}));
-
+app.use(session(sessionOptions));
 
 app.use(flash());
 
@@ -112,12 +104,9 @@ app.get("/", (req, res) => {
   res.redirect("/listings");
 });
 
-
 app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
-
-
 
 app.get("/testListing",wrapAsync( async (req, res) => {
   let sampleListing = new Listing ({
@@ -133,7 +122,7 @@ app.get("/testListing",wrapAsync( async (req, res) => {
 }));
 
 app.all("*", (req, res, next) => {
- next(new ExpressError(404, "Page not Found!"));
+  next(new ExpressError(404, "Page not Found!"));
 });
 
 app.use((err, req, res, next) => {
@@ -141,9 +130,6 @@ app.use((err, req, res, next) => {
    res.status(statusCode).render("error.ejs", {message});
 });
 
-
-
 app.listen(8081, () => {
   console.log("server is listen to the port 8081");
 });
-
