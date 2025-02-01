@@ -43,7 +43,7 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 
 // Middleware to serve static files from the public folder
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "Public")));
 
 const store = MongoStore.create({
   mongoUrl: dbUrl,
