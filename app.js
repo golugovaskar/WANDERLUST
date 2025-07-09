@@ -4,7 +4,6 @@ if(process.env.NODE_ENV != "production") {
 const express = require("express");
 const app = express();
 
-// ✅ Rate Limiting Setup
 const rateLimit = require("express-rate-limit");
 
 const limiter = rateLimit({
