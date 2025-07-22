@@ -33,32 +33,48 @@
 
 ### Other Integrations
 - Google Maps API
+- Cloudinary (for image upload)
 - Render (for deployment)
 
----
 
 ---
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### ✅ Prerequisites
 
 - Node.js and npm installed
-- MongoDB Atlas URI
+- MongoDB Atlas account
+- Cloudinary account
 - Google Maps API key
 
-### Installation
+---
 
-```bash
-git clone https://github.com/golugovaskar/WANDERLUST
-cd WANDERLUST
-npm install
-Setup Environment Variables
-Create a .env file in the root directory and add:
+### 🔐 Setup Environment Variables
 
-###Setup Environment Variables
-Create a .env file in the root directory and add:
+MONGODB_URI=your_mongodb_connection_string
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_cloudinary_api_key
+CLOUDINARY_API_SECRET=your_cloudinary_api_secret
+MAP_API_KEY=your_google_maps_api_key
 
-MONGODB_URI=your_mongodb_uri
-MAP_API_KEY=your_google_maps_key
+---
+###▶️ Run the App Locally
+
+npm start
+
+---
+### 🙋‍♂️ Author
+📧 Email: prajaptigolu07@gmail.com
+🔗 GitHub:@golugavaskar
+
+---
+ ### ⭐ Show Some Love
+If you liked the project, don’t forget to give it a ⭐ on GitHub and share it!
+
+"Explore the world with Wanderlust 🌍✈️"
+
+
+
+
 
