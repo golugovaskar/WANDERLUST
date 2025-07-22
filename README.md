@@ -3,7 +3,7 @@
 <p align="center">
   <i>A full-stack travel destination app built to explore, review, and share your travel experiences.</i><br>
   <br>
-  🌐 Live URL: <a href="[](https://wanderlust-5-qnnb.onrender.com/listings)">Click here to visit</a> <br>
+  🌐 Live URL: <a href="https://wanderlust-5-qnnb.onrender.com/listings">Click here to visit</a> <br>
   📦 GitHub Repo: <a href="https://github.com/golugovaskar/WANDERLUST">WANDERLUST</a>
 </p>
 
@@ -37,23 +37,6 @@
 
 ---
 
-## 📁 Folder Structure
-WANDERLUST/
-│
-├── Public/ # Static assets (HTML, CSS, JS)
-│ ├── CSS/
-│ ├── JS/
-│ └── images/
-│
-├── models/ # Mongoose models (User, Post, etc.)
-├── routes/ # Express routes
-├── controllers/ # Route logic
-├── uploads/ # Uploaded images
-├── app.js # Entry point
-└── .env # Environment variables
-
-
-
 ---
 
 ## 🚀 Getting Started
@@ -77,8 +60,5 @@ Create a .env file in the root directory and add:
 Create a .env file in the root directory and add:
 
 MONGODB_URI=your_mongodb_uri
-CLOUDINARY_CLOUD_NAME=your_cloud_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
 MAP_API_KEY=your_google_maps_key
 
